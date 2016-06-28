@@ -1,0 +1,27 @@
+.wrap {
+  border: 1px solid #c0cfdf;
+}
+.custom {
+  color: #005ebf;
+}
+.avatar {
+  display: block;
+  max-width: 100%;
+  height: auto;
+  width: 100px;
+  margin: auto;
+}
+.custom td {
+  padding: 1.5em 1em 1.5em 0;
+  margin 1em 0;
+}
+.text-right {
+  text-align: right;
+}
+.text-left {
+  text-align: left;
+}
+.text-center {
+  text-align: center;
+}
+

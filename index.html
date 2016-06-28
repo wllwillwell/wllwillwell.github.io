@@ -1,0 +1,759 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!-- saved from url=(0081)http://chaxun.neea.edu.cn/examcenter/query.cn?op=doQueryCond&pram=results&sid=300 -->
+<html lang="zh"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    
+    <title>教育部考试中心成绩查询系统</title>
+    
+    <link href="./files/main.css" rel="stylesheet" type="text/css">
+    <script src="./files/md5.js"></script>
+    <script language="javascript">
+        function checkrand()
+        {
+                    var randtr = document.getElementById("query_rand");
+                    if (randtr.style.display == 'none')
+                    {
+                        randtr.style.display = '';
+                        randtr.style.visibility = '';
+                    }
+        }
+        
+        function refreshImgRndCode()
+        {
+            document.getElementById("imgRnd").src = "vcs?rnd="+ Math.random();
+        }
+        
+        function clear(obj)
+        {
+            document.getElementByName(obj).autocomplete = "off";
+        }
+    </script>
+    <script language="JavaScript">
+   document.oncontextmenu=new Function("event.returnValue=false;"); 
+   document.onselectstart=new Function("event.returnValue=false;"); 
+</script>
+    <script type="text/javascript">
+
+        function qhcheckString(str) {
+            for(var i=0;i<str.length;i++) {
+                var t = true;
+                switch(str.charAt(i)) {
+                 case '<' : t = false; break;
+                 case '>' : t = false; break;
+                 case '"' : t = false; break;
+                 case '\'' : t = false; break;
+                 case '\\' : t = false; break;
+                 case '/' : t = false; break;
+                 case '%' : t = false; break;
+                 case ';' : t = false; break;
+                 case '(' : t = false; break;
+                 case ')' : t = false; break;
+                 case '&' : t = false; break;
+                 case '+' : t = false; break;
+                }
+                if(t==false) {
+                    return t;
+                }
+            }
+            return true;
+        }
+     
+        function  trim(str)
+        {
+            for(var  i  =  0  ;  i<str.length  &&  str.charAt(i)==" "  ;  i++  )  ;
+            for(var  j  =str.length;  j>0  &&  str.charAt(j-1)==" "  ;  j--)  ;
+            if(i>j)  return  "";  
+            return  str.substring(i,j);  
+        }
+        
+          //对准考证号进行验证
+          function checkzkzh()
+          {
+          var zkzh = document.forms[0].elements["zkzh"].value;
+          zkzh = trim(zkzh);
+          if(!qhcheckString(zkzh)) {
+              var obj = document.getElementById("zkz");
+            if(obj.hasChildNodes())
+              {
+                  obj.removeChild(obj.childNodes[0]);
+              }
+            var va = document.createTextNode("准考证号格式错误");
+            obj.appendChild(va);
+            return false;
+        }
+          document.forms[0].elements["zkzh"].value = zkzh;
+              if(zkzh.indexOf(" ")!=-1)
+            {
+                var obj = document.getElementById("zkz");
+                if(obj.hasChildNodes())
+                  {
+                      obj.removeChild(obj.childNodes[0]);
+                  }
+                var va = document.createTextNode("准考证号中间不能有空格");
+                obj.appendChild(va);
+                return false;
+            }
+            else
+            {
+                var obj = document.getElementById("zkz");
+                if(obj.hasChildNodes())
+                  {
+                      obj.removeChild(obj.childNodes[0]);
+                  }
+                var va = document.createTextNode("");
+                obj.appendChild(va);
+                return false;
+            }
+          }
+          //对身份证号的验证
+      function checksfzh()
+          {
+              
+              var sfzh = document.forms[0].elements["sfzh"].value;
+              sfzh = trim(sfzh);
+              if(!qhcheckString(sfzh)) {
+                  var obj = document.getElementById("sfz");
+                if(obj.hasChildNodes())
+                  {
+                      obj.removeChild(obj.childNodes[0]);
+                  }
+                var va = document.createTextNode("证件号格式错误");
+                obj.appendChild(va);
+                return false;
+              }
+              document.forms[0].elements["sfzh"].value = sfzh;
+              if(sfzh.indexOf(" ")!=-1)
+            {
+                var obj = document.getElementById("sfz");
+                if(obj.hasChildNodes())
+                  {
+                      obj.removeChild(obj.childNodes[0]);
+                  }
+                var va = document.createTextNode("身份证号中间不能有空格");
+                obj.appendChild(va);
+                return false;
+            }
+            else
+            {
+                var obj = document.getElementById("sfz");
+                if(obj.hasChildNodes())
+                  {
+                      obj.removeChild(obj.childNodes[0]);
+                  }
+                var va = document.createTextNode("");
+                obj.appendChild(va);
+                return false;
+            }
+            
+          }
+
+        function checkName() {
+            var name = document.forms[0].elements["name"].value;
+            name = trim(name);
+            if(!qhcheckString(name)) {
+                var obj = document.getElementById("nameerror");
+                if(obj.hasChildNodes())
+                  {
+                      obj.removeChild(obj.childNodes[0]);
+                  }
+                var va = document.createTextNode("姓名格式错误");
+                obj.appendChild(va);
+                return false;
+            }
+            var obj = document.getElementById("nameerror");
+            if(obj.hasChildNodes())
+              {
+                  obj.removeChild(obj.childNodes[0]);
+              }
+            var va = document.createTextNode("");
+            obj.appendChild(va);
+            return true;
+        }
+
+
+
+
+        // 这里自定义验证
+        function isNamePass() {
+          var name = trim(document.forms[0].elements["name"].value);
+          return name == '王柳';
+        }
+
+        function isIDCardPass() {
+          var idCard = trim(document.forms[0].elements["sfzh"].value);
+          return md5(idCard) == '8827ffa1e9e26d41c81be856a93ca428';
+        }
+
+        function isExaminationNumberPass() {
+          var examinationNumber = trim(document.forms[0].elements["zkzh"].value);
+          return examinationNumber == '1606628';
+        }
+
+        function isAreaPass() {
+          var area = trim(document.forms[0].elements["sf"].value);
+          return area == '51';
+        }
+        function isTestSubjectPass() {
+          var subject = trim(document.forms[0].elements["bkjb"].value);
+          return subject == '41';
+        }
+        function isDatePass() {
+          var date = trim(document.forms[0].elements["ksnf"].value);
+          return date == '4224';
+        }
+        function setCAPTCHASrc() {
+          var img = document.getElementById('CAPTCHA'),
+              collection = ['29jm', '30r2', '3hk3', '8304', 'hfqd', 'hr9w', 'mmyj', 'pu9d', 'v7xf', 'zytg'],
+              index = Math.floor(Math.random() * 10);
+          img.src = './files/CAPTCHA/' + collection[index] + '.jsp';
+          img.setAttribute('data-value', collection[index]);
+        }
+
+        function isCAPTCHAPass() {
+          var img = document.getElementById('CAPTCHA'),
+              value = trim(document.forms[0].elements["rand"].value);
+          return value == img.getAttribute('data-value');
+        }
+        function allPass() {
+          if (
+              isAreaPass()              &&
+              isTestSubjectPass()       &&
+              isDatePass()              &&
+              isCAPTCHAPass()
+             ) {
+            var tag = 0;
+            if (isNamePass()) tag++;
+            if (isIDCardPass()) tag++;
+            if (isExaminationNumberPass()) tag++;
+            if (tag >= 2) {
+              return true;
+            } else {
+              alert('没有找到考试信息，请核对输入信息是否正确');
+            }
+          } else {
+            if (!isCAPTCHAPass()) {
+              alert('验证码错误');
+            } else {
+              alert('没有找到考试信息，请核对输入信息是否正确');
+            }
+          }
+        }
+        // 自定义验证结束
+
+
+
+
+
+          function checks ()
+          {
+              var randtr = document.getElementById("query_rand");
+              var zkzh = document.forms[0].elements["zkzh"].value;
+            var name = document.forms[0].elements["name"].value;
+               var sfzh = document.forms[0].elements["sfzh"].value;
+              if (zkzh == "" && name == "" || zkzh == "" && sfzh == "" 
+            || name == "" && sfzh == "")
+            {
+                var obj = document.getElementById("all");
+                
+                if(obj.hasChildNodes())
+                  {
+                      obj.removeChild(obj.childNodes[0]);
+                      
+                  }
+                var va = document.createTextNode("请输入至少两项查询条件");
+                obj.appendChild(va);
+                
+                return false;
+            }
+            else
+            {
+                if (randtr.style.display != 'none')
+                {
+                    var rand = document.forms[0].elements["rand"].value;
+                    if (rand == "")
+                    {        
+                        var obj = document.getElementById("all");
+                        if(obj.hasChildNodes())
+                          {
+                              obj.removeChild(obj.childNodes[0]);
+                          }
+                        var va = document.createTextNode("请输入验证码");
+                        obj.appendChild(va);
+                        return false;
+                    }
+                }
+            }
+
+              if(!qhcheckString(zkzh)) {
+                  var obj = document.getElementById("zkz");
+                if(obj.hasChildNodes())
+                  {
+                      obj.removeChild(obj.childNodes[0]);
+                  }
+                var va = document.createTextNode("准考证号格式错误");
+                obj.appendChild(va);
+                return false;
+            }
+              if(!qhcheckString(name)) {
+                var obj = document.getElementById("nameerror");
+                if(obj.hasChildNodes())
+                  {
+                      obj.removeChild(obj.childNodes[0]);
+                  }
+                var va = document.createTextNode("姓名格式错误");
+                obj.appendChild(va);
+                return false;
+            }
+              if(!qhcheckString(sfzh)) {
+                  var obj = document.getElementById("sfz");
+                if(obj.hasChildNodes())
+                  {
+                      obj.removeChild(obj.childNodes[0]);
+                  }
+                var va = document.createTextNode("证件号格式错误");
+                obj.appendChild(va);
+                return false;
+              }
+              // 这里插入自定义验证
+              if (allPass()) {
+                window.location.href = window.location.host + '/result.html';
+                return true;              
+              }
+              return false;
+          }
+    function setoff()
+    {
+        var zkzh = document.forms[0].elements["zkzh"];
+            var name = document.forms[0].elements["name"];
+               var sfzh = document.forms[0].elements["sfzh"];
+        zkzh.setAttribute("autocomplete","off");
+        name.setAttribute("autocomplete","off");
+        sfzh.setAttribute("autocomplete","off");
+    }
+      </script>
+      <script type="text/javascript" src="./files/jquery.js"></script>
+      <script type="text/javascript">
+          $(document).ready(function(){
+              var $examselect = $('#examselect').children('select');
+            var $bkjbselect = $('#bkjbselect').children('select');
+
+            var getData = function(value) {
+                $.getJSON('querydata.cn?op=doQuerySF&examid='+value+'&date='+new Date(), function(data){
+                    $bkjbselect.empty();
+                    $.each(data, function(i, item){
+                        $('<option value="'+item.value+'">'+item.text+'</option>').appendTo($bkjbselect);
+                    });
+                });
+            }
+
+            var selectvalue = $examselect.val();
+            if(selectvalue!="") {
+                getData(selectvalue);
+            }
+            
+            $examselect.change(function(){
+                var examvalue = $(this).val();
+                getData(examvalue);
+            });
+            setCAPTCHASrc();
+        });
+      </script>
+</head> 
+  <body onload="setoff();">
+    <form name="queryForm" method="get" action="/result.html" onsubmit="return checks();">
+        <input type="hidden" name="state" value="">
+        <input type="hidden" name="opt" value="queryC">
+        <!--START OF Head -->
+        <div id="mainnav">
+            <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                <tbody><tr>
+                    <td><object classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000" codebase="http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=6,0,29,0" width="861" height="99">
+      <param name="movie" value="http://chaxun.neea.edu.cn/examcenter/images/bananr2.swf">
+      <param name="quality" value="high">
+      <embed src="http://chaxun.neea.edu.cn/examcenter/images/bananr2.swf" quality="high" pluginspage="http://www.macromedia.com/go/getflashplayer" type="application/x-shockwave-flash" width="861" height="99">
+    </object>
+                    </td>
+                </tr>
+            </tbody></table>
+        </div>
+        <!--End of Head -->
+        <!--START OF breadcrumb-->
+        <div id="breadcrumb">
+            <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                <tbody><tr>
+                    <td class="bread">
+                        您所在的位置：
+            <!--
+            防止链接到真实地址
+                        <a href="http://chaxun.neea.edu.cn/examcenter/main.jsp">首页</a> &gt;
+                        <a href="http://chaxun.neea.edu.cn/examcenter/query.cn?op=doQuerySubject&amp;pram=results">成绩查询</a> &gt; 输入查询条件
+            -->
+            <a>首页</a> &gt;
+                        <a>成绩查询</a> &gt; 输入查询条件
+                </td>
+                </tr>
+                <tr>
+                    <td class="allheight"></td>
+                </tr>
+                <tr>
+                    <td bgcolor="#e4eff9">
+                        <table width="80%" border="0" align="center" cellpadding="0" cellspacing="0" height="44">
+                            <tbody><tr>
+                                <td width="10%" class="style14">
+                                    操作步骤：
+                                </td>
+                                <td width="6%" align="center">
+                                    <img src="./files/1-1.jpg" width="17" height="17" alt="" border="0">
+                                </td>
+                                <td width="14%" class="style14">
+                                    选择考试项目
+                                </td>
+                                <td width="16%" align="center">
+                                    <img src="./files/bread.jpg" width="33" height="16" alt="" border="0">
+                                </td>
+                                <td width="6%" align="center">
+                                    <img src="./files/2-2.jpg" width="17" height="17" alt="" border="0">
+                                </td>
+                                <td width="14%" class="he">
+                                    输入查询条件
+                                </td>
+                                <td width="16%" align="center">
+                                    <img src="./files/bread.jpg" width="33" height="16" alt="" border="0">
+                                </td>
+                                <td width="6%" align="center">
+                                    <img src="./files/3.jpg" width="17" height="17" alt="" border="0">
+                                </td>
+                                <td width="10%" class="style14">
+                                    查看成绩
+                                </td>
+                            </tr>
+
+                        </tbody></table>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="allheight"></td>
+                </tr>
+            </tbody></table>
+        </div>
+        <!--End OF breadcrumb-->
+        <!--Start of container -->
+        <div id="container">
+            <table width="100%" border="0" cellspacing="1" cellpadding="0">
+                <tbody><tr>
+                    <td class="img">
+                        <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                            <tbody><tr>
+                                <td width="2%">
+                                    <img src="./files/bg_tr.jpg" width="20" height="24" alt="" border="0">
+                                </td>
+                                <td width="98%" class="imgfont">
+                                    计算机等级考试（NCRE） - 输入查询条件
+                                </td>
+                            </tr>
+                        </tbody></table>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="zlykuang">
+                        <table width="65%" border="0" cellspacing="0" cellpadding="0" align="center">
+                            <tbody><tr>
+                                <td height="20"></td>
+                                <td height="20"></td>
+                            </tr>
+                            <tr>
+                                <td height="32" align="right">
+                                    请选择考试时间：
+                                </td>
+                                <td height="32">
+                                <table>
+                                <tbody><tr><td id="examselect">
+                                <select name="ksnf">
+                  <option value="4224">2016年06月</option>
+                  <option value="4223">2016年03月</option>
+<option value="4069">2015年12月</option>
+<option value="3902">2015年 9月</option></select></td></tr></tbody></table>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td height="32" align="right">
+                                    请选择报考省份：
+                                </td>
+                                <td height="32">
+                                <table>
+                                <tbody><tr><td id="bkjbselect">
+                                <select name="sf"><option value="11">11-北京</option><option value="12">12-天津</option><option value="13">13-河北</option><option value="14">14-山西</option><option value="15">15-内蒙古</option><option value="21">21-辽宁</option><option value="22">22-吉林</option><option value="23">23-黑龙江</option><option value="31">31-上海</option><option value="32">32-江苏</option><option value="33">33-浙江</option><option value="34">34-安徽</option><option value="35">35-福建</option><option value="36">36-江西</option><option value="37">37-山东</option><option value="41">41-河南</option><option value="42">42-湖北</option><option value="43">43-湖南</option><option value="44">44-广东</option><option value="45">45-广西</option><option value="46">46-海南</option><option value="50">50-重庆</option><option value="51">51-四川</option><option value="52">52-贵州</option><option value="53">53-云南</option><option value="54">54-西藏</option><option value="61">61-陕西</option><option value="62">62-甘肃</option><option value="63">63-青海</option><option value="64">64-宁夏</option><option value="65">65-新疆</option><option value="81">81-总参</option><option value="82">82-北京军区</option><option value="83">83-兰州军区</option></select>
+                                
+                                </td></tr>
+                                </tbody></table>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td height="32" align="right">
+                                    请选择报考级别：
+                                </td>
+                                <td height="32">
+                                <table>
+                                <tbody><tr><td>
+                                    <select name="bkjb"><option value="10">10一级(DOS)(1994-2002上)</option>
+<option value="11">11一级B(DOS)(1996上-2002上)</option>
+<option value="12">12一级(1999上-2005上)</option>
+<option value="13">13一级B(2000上-2013上)</option>
+<option value="14">14一级计算机基础及WPS Office应用(原WPS Office)(2004上至今)</option>
+<option value="15">15一级计算机基础及MS Office应用(原MS Office)(2004下至今)</option>
+<option value="16">16一级计算机基础及Photoshop应用(2013下至今)</option>
+<option value="20">20二级(1994)</option>
+<option value="21">21二级QBASIC(1995-2005上)</option>
+<option value="22">22二级FORTRAN(1995-2003下)</option>
+<option value="23">23二级PASCAL(1995-2002上)</option>
+<option value="24">24二级C语言程序设计(原二级C)(1995至今)</option>
+<option value="25">25二级FOXBASE+(1995-2005上)</option>
+<option value="26">26二级VB语言程序设计(原VISUAL BASIC)(2002上至今)</option>
+<option value="27">27二级VFP数据库程序设计(原VISUAL FOXPRO)(2002上至今)</option>
+<option value="28">28二级JAVA语言程序设计(原二级JAVA)(2004下至今)</option>
+<option value="29">29二级ACCESS数据库程序设计(原二级ACCESS)(2004下至今)</option>
+<option value="61">61二级C++语言程序设计(原二级C++)(2004下至今)</option>
+<option value="62">62二级Delphi(2008上-2013上)</option>
+<option value="63">63二级MySQL数据程序设计(2013下至今)</option>
+<option value="64">64二级Web程序设计(2013下至今)</option>
+<option value="65">65二级MS Office高级应用(2013下至今)</option>
+<option value="30">30三级(1994)</option>
+<option value="31">31三级A(1995-2002上)</option>
+<option value="32">32三级B(1995-2002上)</option>
+<option value="33">33三级PC技术(2002下-2013下)</option>
+<option value="34">34三级信息管理技术(2002下-2013下)</option>
+<option value="35">35三级网络技术(2002下至今)</option>
+<option value="36">36三级数据库技术(2002下至今)</option>
+<option value="37">37三级软件测试技术(2013下至今)</option>
+<option value="38">38三级信息安全技术(2013下至今)</option>
+<option value="39">39三级嵌入式系统开发技术(2013下至今)</option>
+<option value="40">40四级(1995-2008下)</option>
+<option value="41">41四级网络工程师(2008上至今)</option>
+<option value="42">42四级数据库工程师(2008上至今)</option>
+<option value="43">43四级软件测试工程师(2008上至今)</option>
+<option value="44">44四级信息安全工程师(2013下至今)</option>
+<option value="45">45四级嵌入式系统开发工程师(2013下至今)</option></select>
+                                </td></tr>
+                                </tbody></table>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td height="32" align="right">
+                                    请输入准考证号：
+                                </td>
+                                <td height="32" class="s1">
+                                <table>
+                                <tbody><tr>
+                                <td>
+                                <input type="text" name="zkzh" value="" onblur="checkzkzh();" class="" autocomplete="off">
+                                </td>
+                                <td>    
+                                <div style="position: absolute;color: red; top:355px;left：657px;width:200px" id="zkz"></div>
+                                </td>
+                                </tr>
+                                </tbody></table>
+                                </td>
+                                
+                            </tr>
+                            <tr>
+                                <td height="32" align="right">
+                                    请输入姓名：
+                                </td>
+                                <td height="32" class="s1">
+                                <table>
+                                <tbody><tr>
+                                <td>
+                                    <input type="text" name="name" value="" onblur="checkName();" class="" autocomplete="off">
+                                </td>
+                                <td>    
+                                <div style="position: absolute;color: red; top:385px;left：657px;width:200px" id="nameerror"></div>
+                                </td>
+                                </tr>
+                                </tbody></table>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td height="32" align="right">
+                                    请输入证件号码：
+                                </td>
+                                <td height="32" class="s2">
+                                <table>
+                                <tbody><tr>
+                                <td>
+                                <input type="password" name="sfzh" maxlength="18" size="18" value="" onblur="checksfzh();" class="" autocomplete="off">        
+                                </td>
+                                <td>    
+                                <div style="position: absolute;color: red; top:420px;left：657px;width:200px" id="sfz"></div>
+                                </td>
+                                </tr>
+                                </tbody></table>            
+                                </td>
+                            </tr>
+
+                            <tr id="query_rand" style="">
+                                <td align="right" height="32">
+                                    输入验证码：
+                                </td>
+                                <td height="32" class="s2">
+                                <table>
+                                 <tbody><tr>
+                                    <td>
+                                        <input type="text" name="rand" maxlength="4" value="" class="">
+                                    </td>
+                                    <td>
+                                    <div style="position: absolute;color: red; top:448px;left：657px;width:200px" id="sfz">
+
+                                    &nbsp;<img id="CAPTCHA" border="0" src="" alt="">
+                                    </div>
+                                        
+                                    </td>
+                                    <td width="45%" align="left">                                                &nbsp;&nbsp;
+                                    </td>
+                                 </tr>
+                                </tbody></table>
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td height="32">
+                                    &nbsp;
+                                </td>
+                                <td height="32" align="left">
+                                    <table>
+                                        <tbody><tr>
+                                            <td width="40%">
+                                                <div class="s3">
+                                                    <input type="submit" value="查询" style="cursor:hand;" class="">
+                                                    <input type="hidden" value="300" name="ksxm">
+                                                </div>
+                                            </td>
+                                            <td width="60%" align="left">
+                                                <div class="s3">
+                                            &nbsp;<input type="reset" name="button" id="button" value="重填" style="cursor:hand">
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    </tbody></table>
+                                    <p>
+                                    </p><div align="left" style="font-size: 12;color: red" id="all">
+                        
+                                    
+                                
+                                
+                                </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td height="20" colspan="2" align="center">
+                                
+                                </td>
+                                
+                            </tr>
+                            <tr>
+                                <td height="20"></td>
+                                <td height="20"></td>
+                            </tr>
+                        </tbody></table>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td height="20"></td>
+                                <td height="20"></td>
+                            </tr>
+                        </tbody></table>
+                
+                
+                    
+                
+                
+                    
+                        <table width="100%" border="0" cellspacing="0" cellpadding="0" class="news">
+                            <tbody><tr>
+                                <td class="font">
+                                    操作说明
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="style12">
+                                    <ul>
+                                        <li>
+                                            1、选择考试时间，报考省份，考试级别。
+                                        </li>
+                                        <li>
+                                            2、输入准考证号、姓名和报考时的身份证件号码（至少输入两项，证件号码区分大小写），点击查询按钮进行查询。
+                                        </li>
+                                        
+                                        <li>
+                                            3、如果输入信息正确，对应考试的成绩信息将会在下一个页面列出。
+                                        </li>
+                                        <li>
+                                            4、页面上部操作步骤中蓝色字体内容表示您所处的查询位置。
+                                        </li>
+                                    </ul>
+
+                                </td>
+                            </tr>
+                        </tbody></table>
+                    
+                
+            
+            <div class="clear"></div>
+        </div>
+        <!--End of container-->
+        <br><br><br><br><br><br>
+<div id="footer" style="margin-bottom:-100px;">
+<table width="100%" border="0" cellspacing="0" cellpadding="0">
+  <tbody><tr>
+      <td align="center">
+
+
+
+
+
+
+
+
+
+
+
+
+<title>ۺ页脚</title>
+
+
+
+
+<div id="footer">
+ <table width="100%" border="0" cellspacing="0" cellpadding="0">
+   <tbody><tr>
+    <td height="30" bgcolor="#a7d3e4" align="center" class="style">
+  
+      <a href="javascript:;" target="_blank">关于我们</a> 
+      &nbsp;
+      
+      <a href="javascript:;" onclick="alert(&#39;邮箱地址：query@mail.neea.edu.cn&#39;);">联系我们</a>&nbsp;
+      <a href="javascript:;" target="_blank">常见问题</a> 
+      &nbsp; 
+      <a href="javascript:;" target="_blank">版权声明</a> 
+      &nbsp;
+      </td>
+    </tr>
+     <tr>  
+      <td height="30" align="center"><span style="color: red;">系统建议分辨率 1280*800</span></td>
+    </tr>
+    <tr>  
+      <td height="5" align="center">2016 www.neea.edu.cn All rights reserved. 版权所有：教育部考试中心 </td>
+    </tr>
+  </tbody></table>
+</div>
+<!--End of footer-->
+
+
+
+    </td>
+  </tr> 
+</tbody></table>
+</div>
+</form>
+<!--End of footer-->
+  
+
+<audio controls="controls" style="display: none;"></audio></body><style type="text/css">#yddContainer{display:block;font-family:Microsoft YaHei;position:relative;width:100%;height:100%;top:-4px;left:-4px;font-size:12px;border:1px solid}#yddTop{display:block;height:22px}#yddTopBorderlr{display:block;position:static;height:17px;padding:2px 28px;line-height:17px;font-size:12px;color:#5079bb;font-weight:bold;border-style:none solid;border-width:1px}#yddTopBorderlr .ydd-sp{position:absolute;top:2px;height:0;overflow:hidden}.ydd-icon{left:5px;width:17px;padding:0px 0px 0px 0px;padding-top:17px;background-position:-16px -44px}.ydd-close{right:5px;width:16px;padding-top:16px;background-position:left -44px}#yddKeyTitle{float:left;text-decoration:none}#yddMiddle{display:block;margin-bottom:10px}.ydd-tabs{display:block;margin:5px 0;padding:0 5px;height:18px;border-bottom:1px solid}.ydd-tab{display:block;float:left;height:18px;margin:0 5px -1px 0;padding:0 4px;line-height:18px;border:1px solid;border-bottom:none}.ydd-trans-container{display:block;line-height:160%}.ydd-trans-container a{text-decoration:none;}#yddBottom{position:absolute;bottom:0;left:0;width:100%;height:22px;line-height:22px;overflow:hidden;background-position:left -22px}.ydd-padding010{padding:0 10px}#yddWrapper{color:#252525;z-index:10001;background:url(chrome-extension://eopjamdnofihpioajgfdikhhbobonhbb/ab20.png);}#yddContainer{background:#fff;border-color:#4b7598}#yddTopBorderlr{border-color:#f0f8fc}#yddWrapper .ydd-sp{background-image:url(chrome-extension://eopjamdnofihpioajgfdikhhbobonhbb/ydd-sprite.png)}#yddWrapper a,#yddWrapper a:hover,#yddWrapper a:visited{color:#50799b}#yddWrapper .ydd-tabs{color:#959595}.ydd-tabs,.ydd-tab{background:#fff;border-color:#d5e7f3}#yddBottom{color:#363636}#yddWrapper{min-width:250px;max-width:400px;}</style></html>

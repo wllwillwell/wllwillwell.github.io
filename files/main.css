@@ -1,0 +1,111 @@
+body{margin:0px; padding:0px; font-family:"宋体"; font-size:12px;}
+
+img,ul,ol,li,dl,dt,dd {margin: 0; padding: 0; border: 0; list-style:none;}
+
+
+/*顶部样式*/
+#mainnav{width:862px; height:99px; margin-left:auto; margin-right:auto; marign-bottom:8px;}
+/*顶部样式*/
+
+/*主体样式*/
+#container{margin-left:auto; margin-right:auto; width:862px;}
+#container .left{width:200px; padding-right:10px;float:left; }
+#container .right{width:652px;float:right; }
+#container .img{background:url(http://chaxun.neea.edu.cn/examcenter/images/img5.jpg) repeat-x; height:24px; border:solid 1px #bfd9ee;}
+.kuang{height:34px; padding-left:20px; line-height:34px;background: url(http://chaxun.neea.edu.cn/examcenter/images/biao.jpg) no-repeat 10px center;}
+.kuang a{color:#000; text-decoration:none;}
+.kuang a:hover{color:blue; text-decoration:none;}
+#columns{border:solid 1px #c0cfdf; background-color:#f9fcfe;}
+.font{font-size:14px; color:#1472bc; font-weight:bold; text-indent:1.0em; padding-top:5px;}
+.back{ background-color:#f5f4f4;}
+.allheight{height:14px;}
+.clear{clear:both;}
+#breadcrumb{width:862px;margin-left:auto; margin-right:auto; background:url(http://chaxun.neea.edu.cn/examcenter/images/breadcrumb.jpg) repeat-x;}
+#breadcrumb .bread{font-size:12px; color:#FFFFFF; text-indent:1.8em; line-height:28px;}
+#breadcrumb .bread a{color:#FFFFFF; text-decoration:none;}
+#breadcrumb .bread a:hover{color:red; text-decoration:none;}
+.zlykuang{border:solid 1px #c0cfdf;}
+.zlykuangimg{background:url(../images/zlykuangimg.jpg) no-repeat 35px center;  padding-left:60px;}
+.zlykuangimg a{color:#005ebf; text-decoration:none; font-weight:bold;}
+.zlykuangimg a:hover{color:#ff0000; text-decoration:none; font-weight:bold;}
+.zly{ background-color:#f5f4f4;}
+.s1 select{width:115px; height:20px; line-height:12px; font-size:12px;}
+.s1 input{width:110px; height:14px; line-height:14px; font-size:12px;}
+.s2 input{width:130px; height:14px; line-height:14px; font-size:12px;}
+.s3 input{height:23px; width:64px; background:url(http://chaxun.neea.edu.cn/examcenter/images/input.jpg); border:0; padding:2px 0 0; font-size:12px;}
+.s4 input{height:23px; width:80px; background:url(http://chaxun.neea.edu.cn/examcenter/images/input2.jpg); border:0; padding:2px 0 0; font-size:12px;}
+.qhbutton{height:23px; width:64px; background:url(http://chaxun.neea.edu.cn/examcenter/images/input.jpg); border:0; padding:2px 0 0; font-size:12px;}
+.news{border-left:solid 1px #c0cfdf; border-bottom:solid 1px #c0cfdf; border-right:solid 1px #c0cfdf; border-top:dashed 1px #c0cfdf; background-color:#f9fcfe;}
+
+/*主体样式*/
+
+/*底部样式*/
+#footer{width:862px; margin-left:auto; margin-right:auto;}
+/*底部样式*/
+
+
+/*文字样式*/
+.style12{color:#074e97; line-height:22px; text-indent:1.8em; padding:0px 8px;}
+.style12 a{color:#074e97; text-decoration:none;}
+.style12 a:hover{color:#074e97; text-decoration:none;}
+.style{color:#000;}
+.style a{color:#000; text-decoration:none;}
+.style a:hover{color:#074e97; text-decoration:none;}
+.he_xi{font-size:14px; color:#005ebf; line-height:20px;}
+.he{font-size:14px; color:#005ebf; line-height:20px; font-weight:bold;}
+.he a{color:#005ebf; font-weight:bold; text-decoration:none;}
+.he a:hover{color:#ff0000;font-weight:bold; text-decoration:underline;}
+.imgfont{font-size:14px; color:#005ebf; line-height:24px; font-weight:bold; text-indent:1.4em;}
+.style14{font-size:14px; line-height:20px;}
+
+
+.back2 {
+background-color:#FFFFFF;
+}
+.tdbg {
+	background-image: url(http://chaxun.neea.edu.cn/examcenter/images/tdbg.jpg);
+	background-repeat: repeat-x;
+}
+.red {
+	color: #FF0000;
+}
+.Afont15 {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 17px;
+	font-weight: bold;
+}
+.line {
+	border-top-width: 1px;
+	border-right-width: 1px;
+	border-bottom-width: 1px;
+	border-left-width: 1px;
+	border-top-style: none;
+	border-right-style: none;
+	border-bottom-style: solid;
+	border-left-style: none;
+	border-top-color: #666666;
+	border-right-color: #666666;
+	border-bottom-color: #666666;
+	border-left-color: #666666;
+}
+.fontp {
+	font-size: 14px;
+	line-height: 20px;
+	text-indent: 20pt;
+}
+.tr0 {
+	font-size: 12px;
+	line-height: 16px;
+	background-color: #EDF4FA;
+}
+.tr1 {
+
+	font-size: 12px;
+	line-height: 16px;
+	background-color: #FFFFFF;
+}
+.font12 {
+	font-size: 12px;
+	line-height: 18px;
+}
+
